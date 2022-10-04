@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    location        "constant";
+    object          bubbleProperties;
+}
+
+bubbleModelActive true;
+debugMode       true;
+
+modelType       shiPrMa;
+binType         binBaseEntCells;
+entrainmentMaskType alphaLimitCells;
+
+intergroupTransferType intergroupBase;
+bubbleIntergroupActive false;
+
+ab              700;
+productionThreshold 0.006;
+bubbleSchmidtNumber 1.5;
+surfaceAlpha    0.5;
+
+bubbleBinsRadius 1 ( 0.01 );
+EnAlphaMin      0.0001;
+bubbleFractionMax 1;
+
+debugInfoPositional false;
+debugInfoAuxiliary false;
+debugInfoVariables false;
+debugInfoCalculations false;
+
+
+// ************************************************************************* //

@@ -1,0 +1,27 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+
+pressure             	0;
+nozzlePressure          0;
+wallRoughnessHeight		1e-4;
+
+turbulentKE          	1e-6;
+turbulentEpsilon     	1e-7;
+turbulentOmega	     	4e-3;
+
+turbulentKEinlet      	2.35e-4;
+turbulentEpsiloninlet 	3.71e-4;
+turbulentOmegainlet 	6e-1;
+
+velocity				(0 0 0);
+injectorVelocity		(0 0 -3.21);
+nutInitial			 	0;
+#inputMode           	merge
+
+// ************************************************************************* //

@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "0.org/include";
+    object      initialConditions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+initialWaterLevel		0.0;
+
+//inletWaterLevel			8.7;
+inletFlowRate           2.4;
+
+fr0					 0.024; //#calc "0.01*$inletFlowRate"; // 1;
+fr1					 0.24; //#calc "0.1*$inletFlowRate"; // 1;
+fr2					 0.48; //#calc "0.2*$inletFlowRate"; // 2;
+fr3					 1.44; //#calc "0.6*$inletFlowRate"; // 4;
+fr4					 2.28; //#calc "0.95*$inletFlowRate"; // 12.5;
+fr5					 $inletFlowRate; // "1.0*$inletFlowRate"; // 13.5;
+
+frRampTime1				60; 
+frRampTime2			   180; 
+frRampTime3				240; 
+frRampTime4			    600; 
+frRampTime5			    800; 
+frRampTimeF			    1000; 
+
+airBlHeight_             20;
+airBlTopLevel_          100;
+airFreestreamUmag_      0.25;
+bufferLayerHeight_      2.0; // should be at least the height of the cell
+water_bl_height_		0.1; 
+
+wallRoughnessHeight		1e-3;
+
+tI						0.0001;
+l						1.000; //#calc "0.038*Rh"; or 0.07*Rh; or 0.22*h_bl; 0.07*15=1.05
+turbulentKE          	1e-7;
+turbulentEpsilon     	1e-8; //#calc "pow(0.09,3.0/4)*pow($turbulentKE,3.0/2)/l";  //9e-9
+turbulentOmega	     	0.00064; //#calc "sqr($turbulentKE)/20"; // omega=sqr(k)/l=5e-05
+
+turbulentKEAtmo         1e-7;
+turbulentOmegaAtmo	    0.0001; 
+
+atmoDir					(1 0 -1);
+
+bottom_k				0.001;
+bottom_omega			0.06;
+bottom_epsilon			0.0001;
+
+//turbulentKEinlet      	#calc "3.0/2*pow(30.0/15*$tI,2)"; //1e-04
+//turbulentEpsilonInlet 	#calc "pow(0.09,3.0/4)*pow($turbulentKEinlet,3.0/2)/$l";  // 5e-8
+//turbulentOmegainlet 	#calc "sqr($turbulentKEinlet)/(0.09*$l)"; #calc "sqr($turbulentKEinlet)/(0.09^0.25*$l)";
+
+//turbulentKE          	$turbulentKEinlet;
+//turbulentEpsilon     	$turbulentEpsilonInlet;
+//turbulentOmega	     	$turbulentOmegainlet;
+
+
+pressure_internal            	0;
+velocity_internal				(0 0 0);
+nutInitial_internal			 	0;
+
+#inputMode           	merge
+
+// ************************************************************************* //

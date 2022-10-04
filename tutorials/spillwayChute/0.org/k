@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform $turbulentKE;
+
+boundaryField
+{
+    inlet
+    {
+        type            codedFixedValue;
+        name            inletKBL;
+        value           uniform $turbulentKE;
+
+        code
+        #{
+            scalarField& field = *this;
+            const fvPatchVectorField& U = 
+                patch().lookupPatchField<volVectorField, vector>("U");
+
+            scalarField z = patch().Cf().component(vector::Z);
+
+            const vectorField& patchPoints = patch().patch().localPoints();    
+            boundBox bb(patchPoints, true);
+            const scalar bbzMin = bb.min().z();
+
+            const fileName dictFile = "0.org/include/initialConditions";
+            const fileName dictPath = dictFile.path().toAbsolute();
+            const fileName dictName = dictFile.name();
+            const fileName dictFileAbs=dictPath+"/"+dictName;
+
+            IOdictionary initDict
+            (
+                IOobject
+                (
+                    dictFileAbs,
+                    this->db(),
+                    IOobject::MUST_READ,
+                    IOobject::NO_WRITE,
+                    false
+                )                        
+            );
+
+            scalar tI = readScalar(initDict.lookup("tI")); //0.001;
+            scalar kBottom = readScalar(initDict.lookup("bottom_k")); //0.001;
+            scalar bl_h = readScalar(initDict.lookup("water_bl_height_")); //0.001;
+
+            forAll(z, faceI)
+            {
+                if ( z[faceI]-bbzMin >= bl_h )
+                {
+                    field[faceI] = 1.5*sqr(tI)*magSqr(U[faceI]); 
+                }
+                else
+                {
+                    scalar internal = 1.5*sqr(tI)*magSqr(U[faceI]);
+
+                    scalar kBl = kBottom-kBottom*pow((z[faceI]-bbzMin)/bl_h, (2.0));
+
+                    field[faceI] = max(kBl,internal);
+                }
+            }
+        #};        
+    }
+
+    outlet
+    {
+        type            zeroGradient;        
+    }
+
+    bottom
+    {
+        type            kqRWallFunction;
+        value           $internalField;
+    }
+
+    atmosphere
+    {
+        type            fixedValue;
+        value           uniform $turbulentKEAtmo;  
+    }
+
+    #include "include/frontBackPatches"    
+}
+
+
+// ************************************************************************* //

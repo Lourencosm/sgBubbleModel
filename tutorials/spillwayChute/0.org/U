@@ -1,0 +1,72 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform $velocity_internal;
+
+boundaryField
+{
+    inlet
+    {
+        type                    variableHeightFlowRateInletVelocityDoublePowerLawBL;
+        alpha                   alpha.water;
+        airBlHeight             $airBlHeight_;
+        airBlTopLevel           $airBlTopLevel_;
+        airFreestreamUmag       $airFreestreamUmag_;
+        bufferLayerHeight       $bufferLayerHeight_; // should be at least the height of the cell
+        water_bl_height         $water_bl_height_;
+
+        flowRate        table
+//        2
+        (
+            (0               $fr0)
+            ($frRampTime1    $fr1)
+            ($frRampTime2    $fr2)            
+            ($frRampTime3    $fr3)    
+            ($frRampTime4    $fr4)  
+            ($frRampTime5    $fr5)              
+            ($frRampTimeF   $inletFlowRate)  
+        );                     
+  
+        value           $internalField;
+    }
+
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
+    }
+
+    bottom
+    {
+        type            noSlip;  
+    }
+
+    atmosphere
+    {
+        type            pressureDirectedInletOutletVelocity;
+        inletDirection  uniform $atmoDir;
+        value           $internalField;         
+    }
+
+    #include "include/frontBackPatches"    
+}
+
+// ************************************************************************* //

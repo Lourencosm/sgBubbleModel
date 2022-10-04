@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+#include        "../0.org/include/initialConditions"
+
+defaultFieldValues
+(
+    volScalarFieldValue alpha.water 0
+    volScalarFieldValue p_rgh $pressure
+	volVectorFieldValue U $velocity
+	volScalarFieldValue k $turbulentKE
+	volScalarFieldValue omega $turbulentOmega	
+	volScalarFieldValue nut $nutInitial	
+);
+
+regions
+(
+    boxToCell
+    {
+        box (-100 -100 -100) (100 100 0);
+
+        fieldValues
+        (
+            volScalarFieldValue alpha.water 1
+		);
+    }
+);
+
+// ************************************************************************* //

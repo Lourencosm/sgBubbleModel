@@ -1,0 +1,24 @@
+bubbleModel/bubbleModel.C
+bubbleModel/bubbleModelNew.C
+bubbleModel/base/shiBase.C
+bubbleModel/derived/shiNext.C
+bubbleModel/derived/shiPrMa.C
+bubbleModel/derived/shiPrLopes.C
+
+bin/bin.C
+bin/binNew.C
+bin/base/binBaseEntFaces.C
+bin/derived/binBaseEntCells.C
+bin/derived/binBaseEntCellsUn.C
+
+intergroupTransfer/intergroupTransfer.C
+intergroupTransfer/intergroupTransferNew.C
+intergroupTransfer/base/intergroupBase.C
+
+entrainmentMask/entrainmentMask.C
+entrainmentMask/entrainmentMaskNew.C
+entrainmentMask/base/entMaskAlphaLimitFaces.C
+entrainmentMask/base/entMaskAlphaLimitCells.C
+entrainmentMask/base/interfaceCells.C
+
+LIB = $(FOAM_USER_LIBBIN)/libsgBubbleModel

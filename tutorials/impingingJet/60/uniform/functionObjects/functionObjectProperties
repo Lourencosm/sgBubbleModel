@@ -1,0 +1,286 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "60/uniform/functionObjects";
+    object      functionObjectProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+results
+{
+    p
+    {
+        scalar
+        {
+            min(p)          -182.4411290095734;
+            max(p)          17698.33029562124;
+        }
+        label
+        {
+            min(p)_cell     2200;
+            min(p)_processor 1;
+            max(p)_cell     135;
+            max(p)_processor 9;
+        }
+        vector
+        {
+            min(p)_position ( 0.0175614 0.000766747 -0.0394531 );
+            max(p)_position ( 0.387265 0 -1.8 );
+        }
+    }
+    p_rgh
+    {
+        scalar
+        {
+            min(p_rgh)      -481.2174543878257;
+            max(p_rgh)      3179.445766103446;
+        }
+        label
+        {
+            min(p_rgh)_cell 2199;
+            min(p_rgh)_processor 1;
+            max(p_rgh)_cell 61;
+            max(p_rgh)_processor 11;
+        }
+        vector
+        {
+            min(p_rgh)_position ( 0.0175643 3.67275e-20 -0.0402344 );
+            max(p_rgh)_position ( 0.0702571 -1.60135e-20 -0.423438 );
+        }
+    }
+    U
+    {
+        scalar
+        {
+            min(mag(U))     0;
+            max(mag(U))     3.638508520609995;
+        }
+        label
+        {
+            min(mag(U))_cell 0;
+            min(mag(U))_processor 9;
+            max(mag(U))_cell 3563;
+            max(mag(U))_processor 1;
+        }
+        vector
+        {
+            min(mag(U))_position ( 0.0166508 0 -1.8 );
+            max(mag(U))_position ( 0.00121412 2.10907e-21 -0.0246094 );
+        }
+    }
+    k
+    {
+        scalar
+        {
+            min(k)          1.305591001274165e-07;
+            max(k)          7.475829087281909;
+        }
+        label
+        {
+            min(k)_cell     167;
+            min(k)_processor 9;
+            max(k)_cell     2933;
+            max(k)_processor 2;
+        }
+        vector
+        {
+            min(k)_position ( 0.387265 -3.59037e-19 -1.7375 );
+            max(k)_position ( 0.0136626 0 0.0136719 );
+        }
+    }
+    epsilon
+    {
+        scalar
+        {
+            min(epsilon)    2.003590248788567e-09;
+            max(epsilon)    2468.68362076629;
+        }
+        label
+        {
+            min(epsilon)_cell 167;
+            min(epsilon)_processor 9;
+            max(epsilon)_cell 2932;
+            max(epsilon)_processor 2;
+        }
+        vector
+        {
+            min(epsilon)_position ( 0.387265 -3.59037e-19 -1.7375 );
+            max(epsilon)_position ( 0.0136626 1.15698e-20 0.0128906 );
+        }
+    }
+    average
+    {
+        scalar
+        {
+            average(p)      1949.942641479917;
+            average(p_rgh)  155.4266819864948;
+            average(mag(U)) 0.6061332455190425;
+            average(k)      0.2032471732900006;
+            average(epsilon) 15.07962458081868;
+        }
+    }
+    residualsI
+    {
+        scalar
+        {
+            alpha.water     1.90329e-05;
+            Ux              0.000138199;
+            Uy              1.1326e-05;
+            Uz              3.34591e-06;
+            k               3.26568e-06;
+            p_rgh           0.00146915;
+            epsilon         7.31889e-06;
+        }
+    }
+    residualsF
+    {
+        scalar
+        {
+            alpha.water     3.60998e-16;
+            Ux              4.70708e-09;
+            Uy              5.32921e-09;
+            Uz              9.643799999999999e-10;
+            k               3.11971e-09;
+            p_rgh           8.764210000000001e-09;
+            epsilon         3.64122e-09;
+        }
+    }
+    nIterationsI
+    {
+        label
+        {
+            alpha.water     5;
+            Ux              4;
+            Uy              3;
+            Uz              3;
+            k               3;
+            p_rgh           3;
+            epsilon         3;
+        }
+    }
+    nIterationsF
+    {
+        label
+        {
+            alpha.water     5;
+            Ux              4;
+            Uy              3;
+            Uz              3;
+            k               3;
+            p_rgh           9;
+            epsilon         3;
+        }
+    }
+}
+
+wlevel_profiles_ta
+{
+    alpha.water
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/wlevel_profiles_ta/60/Gauge0.35m_alpha.water_p_p_rgh.xy";
+    }
+    p
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/wlevel_profiles_ta/60/Gauge0.35m_alpha.water_p_p_rgh.xy";
+    }
+    p_rgh
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/wlevel_profiles_ta/60/Gauge0.35m_alpha.water_p_p_rgh.xy";
+    }
+    U
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/wlevel_profiles_ta/60/Gauge0.35m_U.xy";
+    }
+}
+
+profiles_jet_ta
+{
+    PrRhoVOF
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    PrRhoWater
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    alpha.water
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    epsilon
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    k
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    magSqrS
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    nut
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    p
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    U
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/profiles_jet_ta/60/profile0.30m_U.xy";
+    }
+}
+
+longitudinal_jet_ta
+{
+    PrRhoVOF
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    PrRhoWater
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    alpha.water
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    epsilon
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    k
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    magSqrS
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    nut
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    p
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_PrRhoVOF_PrRhoWater_alpha.water_epsilon_k_magSqrS_nut_p.xy";
+    }
+    U
+    {
+        file            "/home/lnec/lmendes/runs/cases/1e_preCodeTest_jet_wedge/2_mesh/2h_a2_v1906_sch0252_sol0410_lup_alpha1_ke/23x0_mW2d32_ke/postProcessing/longitudinal_jet_ta/60/vertLine0.012m_U.xy";
+    }
+}
+
+
+// ************************************************************************* //

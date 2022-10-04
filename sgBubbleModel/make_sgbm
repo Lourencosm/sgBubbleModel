@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wclean > /dev/null
+
+wmake -j5
+
+if (( $? )) ; then 
+    echo "libraries compilation failed"
+    exit; else
+    echo -e "\nsgBubbleModel library version 031\ncodename: multiEnt \n\n librarycompiled successfully for $WM_PROJECT $WM_PROJECT_VERSION\n";
+    date
+    echo -e "\n\n"    
+fi

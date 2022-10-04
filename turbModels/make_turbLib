@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wclean > /dev/null
+
+wmake -j5
+
+if (( $? )) ; then 
+    echo "library compilation failed"
+    exit; else
+    echo -e "\nturbModels version 02\n\nlibrary compiled successfully for $WM_PROJECT $WM_PROJECT_VERSION\n";
+    date
+    echo -e "\n\n"    
+fi

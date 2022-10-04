@@ -1,0 +1,106 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "6/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+12
+(
+    inlet
+    {
+        type            patch;
+        inGroups        1(fixedU);
+        nFaces          193;
+        startFace       398809;
+    }
+    platform
+    {
+        type            wall;
+        inGroups        4(concreteB bottom fixedU wall);
+        nFaces          200;
+        startFace       399002;
+    }
+    chute
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          2503;
+        startFace       399202;
+    }
+    outlet
+    {
+        type            patch;
+        inGroups        2(outlet io);
+        nFaces          160;
+        startFace       401705;
+    }
+    atmosphere
+    {
+        type            patch;
+        inGroups        1(atmo);
+        nFaces          216;
+        startFace       401865;
+    }
+    front
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          199493;
+        startFace       402081;
+    }
+    back
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          199493;
+        startFace       601574;
+    }
+    weir_wall
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          64;
+        startFace       801067;
+    }
+    weir1
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          26;
+        startFace       801131;
+    }
+    weir2
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          17;
+        startFace       801157;
+    }
+    weir3
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          3;
+        startFace       801174;
+    }
+    weir4
+    {
+        type            wall;
+        inGroups        4(concreteA bottom fixedU wall);
+        nFaces          111;
+        startFace       801177;
+    }
+)
+
+// ************************************************************************* //

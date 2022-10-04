@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wclean all > /dev/null
+
+wmake libso > wmakeLibso.log
+
+if (( $? )) ; then 
+    echo -e "\nvariableHeightFlowRateInletVelocityDoublePowerLawBL boundary conditions compilation failed\n\n"
+    exit; else
+    echo -e "\nvariableHeightFlowRateInletVelocityDoublePowerLawBL conditions compiled successfully for $WM_PROJECT $WM_PROJECT_VERSION\n\n";  
+fi
+
+wclean all > /dev/null

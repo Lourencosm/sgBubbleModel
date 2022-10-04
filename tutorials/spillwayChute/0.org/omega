@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      omega;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform $turbulentOmega;
+
+boundaryField
+{
+    inlet
+    {
+        type            codedFixedValue;
+        name            inletOmegaBL;
+        value           uniform $turbulentOmega;
+
+        code
+        #{
+            scalarField& field = *this;
+            const fvPatchScalarField& k = 
+                patch().lookupPatchField<volScalarField, vector>("k");
+
+            // patch centre faces z coordinate
+            scalarField z = patch().Cf().component(vector::Z);
+
+            const vectorField& patchPoints = patch().patch().localPoints();    
+            boundBox bb(patchPoints, true);
+            const scalar bbzMin = bb.min().z();
+
+            const fileName dictFile = "0.org/include/initialConditions";
+            const fileName dictPath = dictFile.path().toAbsolute();
+            const fileName dictName = dictFile.name();
+            const fileName dictFileAbs=dictPath+"/"+dictName;
+
+            IOdictionary initDict
+            (
+                IOobject
+                (
+                    dictFileAbs,
+                    this->db(),
+                    IOobject::MUST_READ,
+                    IOobject::NO_WRITE,
+                    false
+                )                        
+            );
+
+            scalar l = readScalar(initDict.lookup("l"));
+            scalar omegaBottom = readScalar(initDict.lookup("bottom_omega"));
+            scalar bl_h = readScalar(initDict.lookup("water_bl_height_"));
+
+            const scalar Cmu25 = pow(0.09, 0.25);
+
+            forAll(z, faceI)
+            {
+                if ( z[faceI]-bbzMin >= bl_h )
+                {
+                    field[faceI] = sqrt(k[faceI])/(Cmu25*l);
+                }
+                else
+                {
+                    scalar internal = sqrt(k[faceI])/(Cmu25*l);
+
+                    scalar omegaBl = omegaBottom-omegaBottom*pow((z[faceI]-bbzMin)/bl_h, (2.0));
+
+                    field[faceI] = max(omegaBl,internal);
+                }
+            }
+        #};         
+    }
+
+    outlet
+    {
+        type            zeroGradient; 
+    }
+
+    bottom
+    {
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+
+    atmosphere
+    {
+        type            fixedValue;
+        value           uniform $turbulentOmegaAtmo;        
+    }
+
+    #include "include/frontBackPatches"    
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform $velocity;
+
+boundaryField
+{
+    axis
+    {
+        type            empty;
+    }
+     
+    side
+    {
+        type            waveVelocity;
+        value           uniform (0 0 0);
+    }
+
+    "(bottom|wallInjector)"
+    {
+        type            slip;
+    }
+
+    bottom
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    "(front|back)"
+    {
+        type            wedge;
+    }
+
+    top
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0); 
+    }
+
+    inlet
+    {
+        type            codedFixedValue;
+        name            inlet;
+        value           $internalField;
+
+        code
+        #{
+            const scalar t = this->db().time().value();
+
+            vector fU = vector(0.0, 0.0, -3.21);
+
+            if (t < 3.0)
+            {
+                fU *= t/3.0;
+            }
+
+            operator==(fU);
+        #};
+    }
+}
+
+// ************************************************************************* //

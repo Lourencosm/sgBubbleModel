@@ -1,0 +1,14 @@
+#!/bin/bash
+
+wclean > /dev/null
+
+wmake -j5
+
+if (( $? )) ; then 
+    echo "interFoam_with_sgbm compilation failed"
+    exit; else
+    echo -e "\n\ninterFoam_with_sgbm compiled successfully for $WM_PROJECT $WM_PROJECT_VERSION\n";
+    echo -e "version \nCodename:  bubbleModel v031 multiEnt"
+    date
+    echo -e "\n\n"    
+fi
